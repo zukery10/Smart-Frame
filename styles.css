@@ -1,0 +1,16 @@
+
+        .date-time {
+            font-size: 2rem;
+            padding: 30px;
+
+        }
+        .time {
+            font-size: 4rem;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .date {
+            font-size: 2.2rem;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
