@@ -9,10 +9,56 @@ async function getWeather() {
     const apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=52.984789228100496&lon=-6.706176996231079&appid=cdf2a899eb4c9d0d1ef01fe08573ab30'
     const response = await fetch(apiUrl);
     const data = await response.json();
-    city.innerHTML = `Hourly Weather for ${data.name}`;
-
-    const temp = data.main.temp;
     
+    const todayStr = new Date().toISOString().split("T")[0]; // "2026-07-25"
+
+    // Split entries into "today" vs "future days"
+    const todayEntries = [];
+    const futureDays = {}; // { "2026-07-26": [entries...], ... }
+
+    for (const entry of data.list) {
+        const entryDate = entry.dt_txt.split(" ")[0];
+        if (entryDate === todayStr) {
+            todayEntries.push(entry);
+        } else {
+            if (!futureDays[entryDate]) futureDays[entryDate] = [];
+            futureDays[entryDate].push(entry);
+        }
+    }
+
+    // ---- Render today's hourly forecast ----
+    let hourlyHtml = "";
+    for (const entry of todayEntries) {
+        const celsius = Math.round(entry.main.temp - 273.15);
+        const time = entry.dt_txt.split(" ")[1].slice(0, 5);
+        const description = entry.weather[0].description;
+
+        hourlyHtml += `
+        <div class="column is-narrow">
+            <div class="box has-text-centered">
+                <p class="heading">${time}</p>
+                <p class="title is-5">${celsius}°</p>
+                <p class="is-size-7 has-text-grey">${description}</p>
+            </div>
+        </div>
+    `;
+    document.getElementById("hourly").innerHTML = hourlyHtml;  
+    }
+    
+    
+
+    // ---- Render one summary card per future day ----
+    let dailyHtml = "";
+    for (const [dateStr, entries] of Object.entries(futureDays)) {
+        const temps = entries.map(e => e.main.temp - 273.15);
+        const hi = Math.round(Math.max(...temps));
+        const lo = Math.round(Math.min(...temps));
+        const desc = entries[Math.floor(entries.length / 2)].weather[0].description;
+        const dayName = new Date(dateStr).toLocaleDateString(undefined, { weekday: "short" });
+
+
+    }
+    document.getElementById("daily").innerHTML = dailyHtml;
 
 
 }
