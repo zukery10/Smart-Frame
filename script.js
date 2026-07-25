@@ -32,19 +32,27 @@ async function getWeather() {
         const celsius = Math.round(entry.main.temp - 273.15);
         const time = entry.dt_txt.split(" ")[1].slice(0, 5);
         const description = entry.weather[0].description;
+        let color_variable = ""
+        if(celsius < 10){
+            color_variable = aqua
+        } else if(celsius >= 10 && celsius <= 16){
+            color_variable = "orange"
+        } else if(celsius > 16){
+            color_variable = "crimson"
+        }
 
         hourlyHtml += `
-        <div class="column is-narrow">
-            <div class="box has-text-centered">
-                <p class="heading">${time}</p>
-                <p class="title is-5">${celsius}°</p>
-                <p class="is-size-7 has-text-grey">${description}</p>
+            <div class="has-text-centered" id="today-card">
+                <p>${time}</p>
+                <p id="degreesHTML" style="--temp-color: ${color_variable};">${celsius}°</p>
+                <p>${description}</p>
+                <hr>
             </div>
-        </div>
+
     `;
-    document.getElementById("hourly").innerHTML = hourlyHtml;  
+      
     }
-    
+    document.getElementById("hourly").innerHTML = hourlyHtml;
     
 
     // ---- Render one summary card per future day ----
@@ -55,8 +63,36 @@ async function getWeather() {
         const lo = Math.round(Math.min(...temps));
         const desc = entries[Math.floor(entries.length / 2)].weather[0].description;
         const dayName = new Date(dateStr).toLocaleDateString(undefined, { weekday: "short" });
+        
+        let lo_color_variable = ""
+        if(lo < 10){
+            lo_color_variable = aqua
+        } else if(lo >= 10 && lo <= 16){
+            lo_color_variable = "orange"
+        } else if(lo > 16){
+            lo_color_variable = "crimson"
+        }
+
+        let hi_color_variable = ""
+        if(hi < 10){
+            hi_color_variable = aqua
+        } else if(hi <= 10 && hi >= 16){
+            hi_color_variable = "orange"
+        } else if(hi > 16){
+            hi_color_variable = "crimson"
+        }
 
 
+        dailyHtml += `
+        <div class="has-text-centered">
+            <p>${dayName}</p>
+            <p>
+                <p id="degreesHTML" style="--temp-color:${lo_color_variable};">${lo}°</p>
+                <p id="degreesHTML" style="--temp-color:${hi_color_variable};">${hi}°</p>
+            </p>
+            <p>${desc}</p>
+        </div>
+        `;
     }
     document.getElementById("daily").innerHTML = dailyHtml;
 
