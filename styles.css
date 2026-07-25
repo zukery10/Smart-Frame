@@ -3,27 +3,32 @@
             background-color: black;
         }
         .date-time {
-            font-size: 2rem;
-            padding: 1em;
+            font-size: 4rem;
             border: white 1px;
         }
         #time {
-            font-size: 4rem;
+            font-size: 5rem;
             font-family: Georgia, 'Times New Roman', Times, serif;
             margin-bottom: 10px;
             font-weight: bold;
         }
         #date {
-            font-size: 2.2rem;
+            font-size: 3rem;
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
 
-        #forecastHTML{
-            padding: 2em;
+        #currentHTML{
+            font-size: 1.5em;
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
-        #today-card{
+        #weekHTML{
+
+            font-size: 1.5em;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        #weather-card{
             margin: 1em;
             font-size: 1.2em;
         }
@@ -31,6 +36,6 @@
         #degreesHTML{
             font-size: 1.2rem;
             color: var(--temp-color, white);
-            color: ;
+            
         }
 
