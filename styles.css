@@ -1,4 +1,7 @@
 
+        .body{
+            background-color: black;
+        }
         .date-time {
             font-size: 2rem;
             padding: 1em;
