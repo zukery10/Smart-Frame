@@ -45,9 +45,10 @@ async function getWeather() {
             <div class="has-text-centered" id="weather-card">
                 <p>${time}</p>
                 <p id="degreesHTML" style="--temp-color: ${color_variable};">${celsius}°</p>
-                <p>${description}</p>
-                <hr>
+                <p id="descHTML">${description}</p>
+                
             </div>
+            
 
     `;
       
@@ -84,13 +85,13 @@ async function getWeather() {
 
 
         dailyHtml += `
-        <div class="has-text-centered" id="weather-card">
+        <div class="column has-text-centered" id="weather-card">
             <p>${dayName}</p>
             <div>
                 <p id="degreesHTML" style="--temp-color:${lo_color_variable};">${lo}°</p>
                 <p id="degreesHTML" style="--temp-color:${hi_color_variable};">${hi}°</p>
             </div>
-            <p>${desc}</p>
+            <p id="descHTML">${desc}</p>
         </div>
         `;
     }

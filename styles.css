@@ -12,13 +12,16 @@
             margin-bottom: 10px;
             font-weight: bold;
         }
+
+        #time-box{
+        padding: 0px;
+        }
         #date {
             font-size: 3rem;
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
-
-
         #currentHTML{
+            margin-top: 1.5em;
             font-size: 1.5em;
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
@@ -27,15 +30,19 @@
             font-size: 1.5em;
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
-
+        #descHTML{
+          font-size: 1.3rem; 
+        }
         #weather-card{
-            margin: 1em;
+            margin-top: .1em;
             font-size: 1.2em;
+            
         }
 
         #degreesHTML{
-            font-size: 1.2rem;
+            font-size: 2rem;
             color: var(--temp-color, white);
             
         }
+
 
