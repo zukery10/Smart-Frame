@@ -2,6 +2,10 @@
         html{
             background-color: black;
         }
+        body{
+            opacity: var(--night-mode)
+        }
+        
         .date-time {
             font-size: 4rem;
             border: white 1px;
@@ -26,23 +30,33 @@
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
         #weekHTML{
-
             font-size: 1.5em;
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
         #descHTML{
           font-size: 1.3rem; 
+          padding: .2em;
         }
         #weather-card{
             margin-top: .1em;
-            font-size: 1.2em;
+            font-size: 1.2em;  
             
         }
-
         #degreesHTML{
             font-size: 2rem;
             color: var(--temp-color, white);
-            
+        }
+        #weatherIconHTML{
+            width: 90px;
+            height: 80px;  
+        }
+        #factHTML{
+            margin-top: 1em;
+            font-size: 1.1em;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        hr{
+            margin:.3em;
         }
 
 

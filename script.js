@@ -32,6 +32,11 @@ async function getWeather() {
         const celsius = Math.round(entry.main.temp - 273.15);
         const time = entry.dt_txt.split(" ")[1].slice(0, 5);
         const description = entry.weather[0].description;
+
+        const iconCode = entry.weather[0].icon;
+        const iconURL = `https://openweathermap.org/img/wn/${iconCode}@2x.png`
+
+        console.log(iconCode)
         let color_variable = ""
         if(celsius < 10){
             color_variable = aqua
@@ -45,11 +50,10 @@ async function getWeather() {
             <div class="has-text-centered" id="weather-card">
                 <p>${time}</p>
                 <p id="degreesHTML" style="--temp-color: ${color_variable};">${celsius}°</p>
-                <p id="descHTML">${description}</p>
+               
+                <img src="${iconURL}" alt="${description}" id="weatherIconHTML">
                 
             </div>
-            
-
     `;
       
     }
@@ -67,7 +71,7 @@ async function getWeather() {
         
         let lo_color_variable = ""
         if(lo < 10){
-            lo_color_variable = aqua
+            lo_color_variable = "aqua"
         } else if(lo >= 10 && lo <= 16){
             lo_color_variable = "orange"
         } else if(lo > 16){
@@ -76,8 +80,8 @@ async function getWeather() {
 
         let hi_color_variable = ""
         if(hi < 10){
-            hi_color_variable = aqua
-        } else if(hi <= 10 && hi >= 16){
+            hi_color_variable = "aqua"
+        } else if(hi > 10 && hi <= 16){
             hi_color_variable = "orange"
         } else if(hi > 16){
             hi_color_variable = "crimson"
@@ -100,10 +104,6 @@ async function getWeather() {
 
 }
 
-
-
-
-
 async function updateDateTime() {
             const now = new Date();
             const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -112,8 +112,32 @@ async function updateDateTime() {
             const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
             const formattedTime = now.toLocaleTimeString(undefined, timeOptions);
             document.getElementById('time').textContent = formattedTime;
+
+            let nightMode = 1;
+            const currentHour = now.getHours();
+            if(currentHour >= 21 || currentHour < 7){
+                nightMode = 0.1;
+            } else{
+                nightMode = 1;
+            }
+
+            document.documentElement.style.setProperty("--night-mode", nightMode)
         }
+
+
+async function randomFact() {
+    const url = "https://uselessfacts.jsph.pl//api/v2/facts/random?language=en"
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const fact = data.text;
+    document.getElementById("factHTML").innerHTML = fact;
+}
+
+
         updateDateTime();
         getWeather();
+        randomFact();
         setInterval(updateDateTime, 1000);
-        setInterval(getWeather, 600000)
+        setInterval(getWeather, 600000);
+        setInterval(randomFact,43200000)
